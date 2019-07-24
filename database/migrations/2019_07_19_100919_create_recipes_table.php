@@ -18,7 +18,7 @@ class CreateRecipesTable extends Migration
             // add relation to user table
             $table->Integer('user_id');
             $table->string('edamam_id', 32);
-            $table->string('json_data');
+            $table->json('json_data');
             $table->timestamps();
             $table->unique(['user_id', 'edamam_id']);
         });
