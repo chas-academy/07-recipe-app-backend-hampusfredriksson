@@ -64,4 +64,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->attributes['password'] = bcrypt($value);
     }
+
+    // _ Bind the users to recipes
+    // public function recipes()
+    // {
+    //     return $this->hasMany('App\User');
+    // }
 }
