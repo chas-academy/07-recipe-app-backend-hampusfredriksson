@@ -15,4 +15,4 @@ Route::group([
     Route::post('me', 'AuthController@me');
 });
 
-Route::resource('recipes', 'RecipeController');
+Route::resource('recipes', 'RecipeController')->middleware('auth:api');

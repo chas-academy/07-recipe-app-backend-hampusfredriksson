@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Recipe;
 use Illuminate\Support\Facades\Auth;
+
 // use App\Http\Controllers\Auth;
 
 class RecipeController extends Controller
@@ -16,7 +17,7 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        return Recipe::take(10)->get();
+        return auth()->user()->recipes()->get();
     }
 
     /**
@@ -25,7 +26,8 @@ class RecipeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { }
+    {
+    }
 
 
 
@@ -37,15 +39,16 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        $recipe = new Recipe();
-        $recipe->user_id = '1';
-        // $recipe = User::find(1)->Recipe;
-        // _ Use this somehow! 
-        // $recipe->user_id = Auth()->user('user_id');
-        $recipe->edamam_id = $request->input('id');
-        $recipe->json_data = json_encode($request->all());
+        $userId = auth()->user()->id;
+
+        $recipe = Recipe::create([
+            'user_id' => $userId,
+            'edamam_id' => $request->input('id'),
+            'json_data' => $request->getContent()
+        ]);
+
         $recipe->save();
-        return ([]);
+        return response()->json('great success');
     }
 
     /**
