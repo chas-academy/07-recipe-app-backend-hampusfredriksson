@@ -12,5 +12,5 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Redirect()->away('http://localhost:4200');
 });
