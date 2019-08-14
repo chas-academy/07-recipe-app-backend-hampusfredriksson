@@ -12,5 +12,8 @@
 */
 
 Route::get('/', function () {
-    return Redirect()->away('http://localhost:4200');
-});
+    return response()->json([
+        'status' => 'ok',
+        'message' => 'recipe-api-v1.0.0'
+    ]);
+})->name('index');
